@@ -1,3 +1,4 @@
+/*
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
@@ -23,7 +24,6 @@ const server = http.createServer((req, res) => {
        res.writeHead(200, {'Content-Type': 'application/json'});
        res.end(JSON.stringify(users));
     }
-    */
    let filepath = path.join(
         __dirname,
         'public', 
@@ -77,3 +77,27 @@ const server = http.createServer((req, res) => {
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+*/
+
+const express = require('express');
+const path = require('path');
+const Members = require('./Members');
+const moment = require('moment');
+const logger = require('./middleware/logger');
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+
+app.use(logger);
+
+
+// ROUTES
+app.get('/api/members', (req, res) => res.json(Members));
+
+
+// STATIC FILES
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
