@@ -82,22 +82,29 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const express = require('express');
 const path = require('path');
-const Members = require('./Members');
-const moment = require('moment');
 const logger = require('./middleware/logger');
+const exphbs = require('express-handlebars');
+const Members = require('./Members');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
+// app.use(logger);
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 
-app.use(logger);
-
-
-// ROUTES
-app.get('/api/members', (req, res) => res.json(Members));
-
+app.get('/', (req, res) => res.render('index', {
+    title: "Members App",
+    Members
+}));
 
 // STATIC FILES
 app.use(express.static(path.join(__dirname, 'public')));
+
+//ROUTERS
+app.use('/api/members', require('./routes/api/members'));
 
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
