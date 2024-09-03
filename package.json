@@ -11,6 +11,7 @@
   "author": "Miro Hagelberg",
   "license": "ISC",
   "devDependencies": {
+    "mongodb": "^6.8.0",
     "nodemon": "^3.1.4"
   }
 }
