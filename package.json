@@ -1,12 +1,16 @@
 {
   "name": "fullstack_tasklist",
   "version": "1.0.0",
-  "description": "",
+  "description": "fullstack tasklist",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --env-file=.env server2.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Miro Hagelberg",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
 }
